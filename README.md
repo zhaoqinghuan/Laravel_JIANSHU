@@ -1,3 +1,3 @@
 # Laravel_JIANSHU
 
-#Im,Fine,Thinks.
+2018.1.31   Init;
