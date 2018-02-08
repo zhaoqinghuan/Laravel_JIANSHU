@@ -1,3 +1,4 @@
-# Laravel_JIANSHU
 
-2018.1.31   Init;
+
+## Laravel框架学习并应用开发简书
+
