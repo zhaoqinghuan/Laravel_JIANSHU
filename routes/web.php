@@ -14,3 +14,7 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+//Route::xxx('/路由名','[控制器]@[方法名]');
+Route::get('/posts','\APP\Http\Controllers\PostController@index');
+//
