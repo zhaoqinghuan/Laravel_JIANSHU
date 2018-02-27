@@ -36,28 +36,15 @@
             <div>
                 @foreach( $posts as $post)
                 <div class="blog-post">
-                    <h2 class="blog-post-title"><a href="/posts/62" >{{$post['title']}}</a></h2>
-                    <p class="blog-post-meta">May 14, 2017 by <a href="/user/5">Kassandra Ankunding2</a></p>
-
-                    <p>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好...
+                    <h2 class="blog-post-title"><a href="/posts/{{$post->id}}" >{{$post->title}}</a></h2>
+                    <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} by <a href="/user/5">Kassandra Ankunding2</a></p>
+                    {{-- 内容只显示100个字符长度多余的用...代替 {!! !!}方法的作用是过滤HTMl标签后进行展示 --}}
+                    {!!str_limit($post->content,100,'...')!!}
                     <p class="blog-post-meta">赞 0  | 评论 0</p>
                 </div>
                 @endforeach
-                <ul class="pagination">
-                    <li class="disabled"><span>&laquo;</span></li>
-                    <li class="active"><span>1</span></li>
-                    <li><a href="http://127.0.0.1:8000/posts?page=2">2</a></li>
-                    <li><a href="http://127.0.0.1:8000/posts?page=3">3</a></li>
-                    <li><a href="http://127.0.0.1:8000/posts?page=4">4</a></li>
-                    <li><a href="http://127.0.0.1:8000/posts?page=5">5</a></li>
-                    <li><a href="http://127.0.0.1:8000/posts?page=6">6</a></li>
-                    <li><a href="http://127.0.0.1:8000/posts?page=7">7</a></li>
-                    <li><a href="http://127.0.0.1:8000/posts?page=8">8</a></li>
-                    <li><a href="http://127.0.0.1:8000/posts?page=9">9</a></li>
-                    <li><a href="http://127.0.0.1:8000/posts?page=10">10</a></li>
-                    <li><a href="http://127.0.0.1:8000/posts?page=2" rel="next">&raquo;</a></li>
-                </ul>
-
+               {{--分页展示--}}
+                {{$posts->links()}}
             </div><!-- /.blog-main -->
         </div>
 @endsection

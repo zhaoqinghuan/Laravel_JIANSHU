@@ -22,3 +22,10 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
         'remember_token' => str_random(10),
     ];
 });
+
+$factory->define(App\Post::class, function (Faker\Generator $faker) {
+    return [
+        'title' => $faker->sentence(6),//自动填充title 最长6个单词
+        'content' => $faker->paragraph(10),//自动填充内容 最长10个句子
+    ];
+});

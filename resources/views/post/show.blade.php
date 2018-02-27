@@ -6,21 +6,19 @@
         <div class="col-sm-8 blog-main">
             <div class="blog-post">
                 <div style="display:inline-flex">
-                    <h2 class="blog-post-title">{{$post['title']}}</h2>
-                    @if($post['isShow'] == true)
-                        <a style="margin: auto"  href="/posts/62/edit">
+                    <h2 class="blog-post-title">{{$post->title}}</h2>
+                        <a style="margin: auto"  href="/posts/{{$post->id}}/edit">
                             <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
                         </a>
-                    @endif
-                        <a style="margin: auto"  href="/posts/62/delete">
+                        <a style="margin: auto"  href="/posts/{{$post->id}}/delete">
                             <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
                         </a>
                 </div>
-                <p class="blog-post-meta">May 14, 2017 by <a href="#">Kassandra Ankunding2</a></p>
-
-                <p><p>你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你好你你好你好似懂非懂说</p><p><br></p></p>
+                <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} <a href="#">Kassandra Ankunding2</a></p>
+                {{--{!! !!}方法的作用是过滤HTMl标签后进行展示 --}}
+                <p>{!! $post->content !!}</p>
                 <div>
-                    <a href="/posts/62/zan" type="button" class="btn btn-primary btn-lg">赞</a>
+                    <a href="/posts/{{$post->id}}/zan" type="button" class="btn btn-primary btn-lg">赞</a>
                 </div>
             </div>
             <div class="panel panel-default">
