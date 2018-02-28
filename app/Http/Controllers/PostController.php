@@ -7,6 +7,7 @@ class PostController extends Controller
 {
     //列表页面
     public function index(){
+
         //按照时间顺序将所有的文章查询出来
         //$posts = Post::orderby('created_at','desc')->get();
         //按照时间顺序将所有的文章查询出来并进行分页
