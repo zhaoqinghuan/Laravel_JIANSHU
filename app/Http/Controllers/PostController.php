@@ -38,8 +38,11 @@ class PostController extends Controller
         ]);
         //获取所有请求过来的对象信息
         //dd(\request()->all());
-        //存储传递过来的参数
-        $post = Post::create(request(['title','content']));
+        //获取当前登录的用户ID信息
+        $user_id = \Auth::id();
+        //存储传递过来的参数以及当前登录的用户信息
+        $params = array_merge(request(['title','content']),compact('user_id'));
+        $post = Post::create($params);
         //数据存储完成后页面重定向到文章列表页
         return redirect("/posts");
     }
@@ -50,6 +53,7 @@ class PostController extends Controller
     //编辑逻辑
     public function update(Post $post){
         //验证
+        //  表单输入验证
         $this->validate(\request(),[
             'title' => 'required|string|max:100|min:10',
             'content' => 'required|string|min:10',
@@ -61,6 +65,8 @@ class PostController extends Controller
             'content.min'=>'文章内容过短',
 
         ]);
+        //  权限验证 第一个参数对应当前的操作 第二个参数对应当前编辑的参数
+        $this->authorize('update',$post);
         //逻辑
         $post->title = \request('title');
         $post->content = \request('content');
@@ -71,7 +77,8 @@ class PostController extends Controller
     //删除逻辑
     public function delete(Post $post){
         //验证
-        // 进行用户权限验证是否当前用户有权进行文章删除
+        //  权限验证 第一个参数对应当前的操作 第二个参数对应当前编辑的参数
+        $this->authorize('delete',$post);
         //逻辑
         $post->delete();
         //渲染 跳转到文章列表页

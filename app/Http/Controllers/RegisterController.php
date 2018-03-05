@@ -12,17 +12,16 @@ class RegisterController extends Controller
         //验证
         $this->validate(\request(),[
             'name'      =>  'required|min:3|unique:users,name',
-
             //验证表单提交过来的账户名 满足必填，最短三位，在users表中的name字段必须唯一
             'email'     =>  'required|unique:users,email|email',
             //验证表单提交过来的邮箱 满足必填，在users表中的email字段必须唯一, 符合email格式
             'password'  =>  'required|min:5|max:10|confirmed'
             //验证表单提交过来的密码 满足必填，最短5位最长10位，两次填写必须一致
         ],[
-            'name.required'=>'账户名名必须填写',
+            'name.required'=>'账户名必须填写',
             'name.min'=>'账户名最短填写三位',
             'name.unique'=>'该账户名已注册',
-            'email.unique'=>'该邮箱已注册',
+            'email.required'=>'邮箱必须填写',
             'email.unique'=>'该邮箱已注册',
             'email.email'=>'请输入正确的邮箱格式',
             'password.required'=>'密码必须填写',

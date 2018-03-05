@@ -7,14 +7,22 @@
             <div class="blog-post">
                 <div style="display:inline-flex">
                     <h2 class="blog-post-title">{{$post->title}}</h2>
-                        <a style="margin: auto"  href="/posts/{{$post->id}}/edit">
-                            <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                        </a>
-                        <a style="margin: auto"  href="/posts/{{$post->id}}/delete">
-                            <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                        </a>
+                        {{--对编辑按钮做权限验证--}}
+                        @can('update',$post)
+                            <a style="margin: auto"  href="/posts/{{$post->id}}/edit">
+                                <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                            </a>
+                        @endcan
+                        &nbsp;&nbsp;&nbsp;&nbsp;
+                        {{--对删除按钮做权限验证--}}
+                        @can('delete',$post)
+                            <a style="margin: auto"  href="/posts/{{$post->id}}/delete">
+                                <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
+                            </a>
+                        @endcan
                 </div>
-                <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}} <a href="#">Kassandra Ankunding2</a></p>
+                <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}}
+                    <a href="#">{{ $post->user->name }}</a></p>
                 {{--{!! !!}方法的作用是过滤HTMl标签后进行展示 --}}
                 <p>{!! $post->content !!}</p>
                 <div>

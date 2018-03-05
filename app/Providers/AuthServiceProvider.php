@@ -13,7 +13,9 @@ class AuthServiceProvider extends ServiceProvider
      * @var array
      */
     protected $policies = [
-        'App\Model' => 'App\Policies\ModelPolicy',
+        //'App\Model' => 'App\Policies\ModelPolicy',
+        //将策略类与模型文件相关联
+        'App\Post' => 'App\Policies\PostPolicy',
     ];
 
     /**
