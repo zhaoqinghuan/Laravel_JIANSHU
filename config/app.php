@@ -162,12 +162,10 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-
         /*
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
-
         /*
          * Application Service Providers...
          */
@@ -177,6 +175,8 @@ return [
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
 
+        Laravel\Scout\ScoutServiceProvider::class,
+        ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
     ],
 
     /*

@@ -7,6 +7,17 @@ use App\Model;
 //默认指定Xxxs表
 class Post extends Model
 {
+
+    //赞模块的一对一关联操作(当前用户是否已经点赞)
+    public function zan($user_id){
+        return $this->hasOne(\App\Zan::class)->where('user_id',$user_id);
+    }
+
+    //赞模块的一对多关联操作(当前有多少用户已经点赞)
+    public function zans(){
+        return $this->hasMany(\App\Zan::class);
+    }
+
     //手动指定表
     //protected $table = "xxxx";
 

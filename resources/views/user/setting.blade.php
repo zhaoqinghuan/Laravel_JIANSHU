@@ -1,4 +1,4 @@
-@extends("layout.main");
+@extends("layout.main")
 {{--引入指定的视图模板--}}
 @section("content")
     {{--指定将这一部分替换给视图模板中的content部分--}}
@@ -15,7 +15,7 @@
             <div class="form-group">
                 <label class="col-sm-2 control-label">头像</label>
                 <div class="col-sm-2">
-                    <input class=" file-loading preview_input" type="file" value="头像" style="width:72px" name="avatar">
+                    <input class=" file-loading preview_input" type="file" value="头像" style="width:220px" name="avatar">
                     <img  class="preview_img" src="{{ $user->avatar }}" alt="" class="img-rounded" style="border-radius:500px;">
                 </div>
             </div>

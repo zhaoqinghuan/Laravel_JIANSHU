@@ -12,6 +12,12 @@
 //使用中间件对路由进行控制
 Route::group(['middleware' => 'auth:web'],function(){
 //  文章模块
+    //  赞
+        Route::get('/posts/{post}/zan', '\App\Http\Controllers\PostController@zan');
+    //  取消赞
+        Route::get('/posts/{post}/unzan', '\App\Http\Controllers\PostController@unzan');
+    //  文章评论提交
+        Route::post('/posts/{post}/comment', '\App\Http\Controllers\PostController@comment');
     //  文章列表页路由
         Route::get('/posts', '\App\Http\Controllers\PostController@index');
     //  创建文章页面
@@ -36,7 +42,9 @@ Route::group(['middleware' => 'auth:web'],function(){
     //  个人设置行为
         Route::post('/user/me/setting','\App\Http\Controllers\UserController@settingStore');
 
+
 });
+
 //  用户模块
 //  注册页面
 Route::get('/register','\App\Http\Controllers\RegisterController@index');
