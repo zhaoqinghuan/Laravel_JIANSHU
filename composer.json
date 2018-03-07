@@ -6,9 +6,13 @@
     "type": "project",
     "require": {
         "php": ">=5.6.4",
+        "almasaeed2010/adminlte": "~2.3.11",
+        "barryvdh/laravel-debugbar": "^2.3",
+        "guzzlehttp/guzzle": "^6.2",
         "laravel/framework": "5.4.*",
-        "laravel/scout": "^4.0",
-        "laravel/tinker": "~1.0"
+        "laravel/scout": "^3.0",
+        "laravel/tinker": "~1.0",
+        "tamayo/laravel-scout-elastic": "^3.0"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",
@@ -46,7 +50,6 @@
     },
     "config": {
         "preferred-install": "dist",
-        "sort-packages": true,
-        "optimize-autoloader": true
+        "sort-packages": true
     }
 }
