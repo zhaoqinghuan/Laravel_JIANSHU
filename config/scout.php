@@ -89,7 +89,7 @@ return [
         'secret' => env('ALGOLIA_SECRET', ''),
     ],
 
-    //添加elasticsearch引擎
+    //添加elasticsearch引擎配置项
     'elasticsearch' => [
         'index' => env('ELASTICSEARCH_INDEX', 'laravel_js'),//配置默认的索引名称
         'hosts' => [

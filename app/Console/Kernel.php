@@ -7,13 +7,9 @@ use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
 
 class Kernel extends ConsoleKernel
 {
-    /**
-     * The Artisan commands provided by your application.
-     *
-     * @var array
-     */
+    //将需要自动执行的类挂载到这里
     protected $commands = [
-        //
+        \App\Console\Commands\ESInit::class
     ];
 
     /**
