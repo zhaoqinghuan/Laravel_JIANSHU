@@ -9,6 +9,18 @@ use Illuminate\Support\Facades\Auth;
 
 class PostController extends Controller
 {
+    //搜索结果页
+    public function search(){
+        //验证
+        $this->validate(\request(),[
+            'query' => 'required'//表单提交字段为必填字段
+        ]);
+        //逻辑
+        $query = \request('query');
+        $posts = Post::search(request('query'))->paginate(2);//  调用模型中的查询方法进行分页展示
+        //渲染
+        return view('post/search',compact('posts','query'));
+    }
 
     //列表页面
     public function index(){

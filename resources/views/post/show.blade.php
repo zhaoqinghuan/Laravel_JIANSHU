@@ -1,4 +1,4 @@
-@extends("layout.main");
+@extends("layout.main")
 {{--引入指定的视图模板--}}
 @section("content")
 

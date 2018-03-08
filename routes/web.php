@@ -12,6 +12,8 @@
 //使用中间件对路由进行控制
 Route::group(['middleware' => 'auth:web'],function(){
 //  文章模块
+    //  文章搜索
+    Route::get('/posts/search', '\App\Http\Controllers\PostController@search');
     //  赞
         Route::get('/posts/{post}/zan', '\App\Http\Controllers\PostController@zan');
     //  取消赞

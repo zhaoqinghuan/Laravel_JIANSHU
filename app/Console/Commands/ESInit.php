@@ -13,7 +13,6 @@ class ESInit extends Command
     {
         parent::__construct();
     }
-
     //实际要进行的操作
     public function handle()
     {
@@ -53,7 +52,7 @@ class ESInit extends Command
         //然后创建这个模板
         $client->put($url, $param);
         //完成后做分割
-        $this->info("========= Create Template OK ========");
+        $this->info("========= Create Template Ok ========");
         // 创建index
         //确认索引访问地址
         $url = config('scout.elasticsearch.hosts')[0] . '/' . config('scout.elasticsearch.index');
@@ -84,6 +83,6 @@ class ESInit extends Command
         //请求这个索引
         $client->put($url, $param);
         //完成索引做分割
-        $this->info("========= Create index OK ========");
+        $this->info("========= Create Index Ok ========");
     }
 }

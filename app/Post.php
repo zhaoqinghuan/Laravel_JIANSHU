@@ -1,9 +1,27 @@
 <?php
 namespace App;
 use App\Model;
+//引入LaravelScout扩展类
+use Laravel\Scout\Searchable;
 //默认指定Xxxs表
 class Post extends Model
 {
+    //将Searchable引入到当前类
+    use Searchable;
+    //定义索引中的type值
+    public function searchableAs()
+    {
+        return "post";
+    }
+    //定义有哪些字段需要被进行搜索
+    public function toSearchableArray()
+    {
+        return [
+            'title'=>$this->title,
+            'content'=>$this->content,
+        ];
+    }
+
     //赞模块的一对一关联操作(当前用户是否已经点赞)
     public function zan($user_id){
         return $this->hasOne(\App\Zan::class)->where('user_id',$user_id);
