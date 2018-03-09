@@ -1,13 +1,22 @@
 <?php
-
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 //  引入User表的模型文件
 use App\User;
-
 class UserController extends Controller
 {
+    //  个人中心页面
+    public function show(){
+        return view('user.show');
+    }
+    //添加关注
+    public function fan(){
+
+    }
+    //取消关注
+    public function unfan(){
+
+    }
     //  个人设置行为
     public function settingStore(Request $request){
         //验证
@@ -40,7 +49,6 @@ class UserController extends Controller
         //渲染
         return back();
     }
-
     //  个人设置页面
     public function setting(){
         //获取当前登录人信息并传给视图

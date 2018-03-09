@@ -11,6 +11,21 @@
 */
 //使用中间件对路由进行控制
 Route::group(['middleware' => 'auth:web'],function(){
+//  个人中心模块
+    //  添加关注
+    Route::post('/user/{user}/fan','\App\Http\Controllers\UserController@fan');
+    //  取消关注
+    Route::post('/user/{user}/unfan', '\App\Http\Controllers\UserController@unfan');
+    //  个人中心页面
+    Route::get('/user/{user}','\App\Http\Controllers\UserController@show');
+
+    //  个人设置页面
+    Route::get('/user/me/setting','\App\Http\Controllers\UserController@setting');
+    //  个人设置行为
+    Route::post('/user/me/setting','\App\Http\Controllers\UserController@settingStore');
+    //  登出行为
+    Route::get('/logout','\App\Http\Controllers\LoginController@logout');
+
 //  文章模块
     //  文章搜索
     Route::get('/posts/search', '\App\Http\Controllers\PostController@search');
@@ -36,13 +51,6 @@ Route::group(['middleware' => 'auth:web'],function(){
         Route::get('/posts/{post}/delete', '\App\Http\Controllers\PostController@delete');
     //  编辑器图片上传
         Route::post('/post/image/upload','\App\Http\Controllers\PostController@imageUpload');
-
-    //  登出行为
-        Route::get('/logout','\App\Http\Controllers\LoginController@logout');
-    //  个人设置页面
-        Route::get('/user/me/setting','\App\Http\Controllers\UserController@setting');
-    //  个人设置行为
-        Route::post('/user/me/setting','\App\Http\Controllers\UserController@settingStore');
 
 
 });
