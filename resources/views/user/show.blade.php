@@ -5,10 +5,12 @@
     {{--我的信息部分--}}
     <div class="col-sm-8">
         <blockquote>
-            <p><img src="http://127.0.0.1:8000/storage/1/SzC3QpTvrN3RyIGfphiBzTxfZaDqfQgJq4wE23Rs.jpeg" alt="" class="img-rounded" style="border-radius:500px; height: 40px"> Kassandra Ankunding2
+            <p><img src="{{$user->avatar}}" alt="{{$user->name}}" class="img-rounded" style="border-radius:500px; height: 40px">
+                {{$user->name}}
             </p>
-            <footer>
-                关注：4｜粉丝：0｜文章：9</footer>
+            <footer>关注：{{$user->stars_count}}｜粉丝：{{$user->fans_count}}｜文章：{{$user->posts_count}}</footer>
+            {{--将公共关注组件引入并传值 值是目标用户信息 用于传值的第二个参数是数组--}}
+            @include('user.badges.like',['target_user'=>$user])
         </blockquote>
     </div>
     {{--文章，粉丝，关注模块--}}
@@ -22,28 +24,34 @@
             <div class="tab-content">
                 {{--文章模块--}}
                 <div class="tab-pane active" id="tab_1">
-                    <div class="blog-post" style="margin-top: 30px">
-                        <p class=""><a href="/user/5">Kassandra Ankunding2</a> 1周前</p>
-                        <p class=""><a href="/posts/58" >自动放大舒服的撒</a></p>
-                        <p>我们坚持一个中国我们坚持一个中国我们坚持一个中国我们坚持一个中国我们坚持一个中国我们坚持一个中国我们...</p>
-                    </div>
+                    @foreach($posts as $post)
+                        <div class="blog-post" style="margin-top: 30px">
+                            <p class=""><a href="/user/{{$post->user->id}}"> {{$post->user->name}} </a> 创建于  {{$post->created_at->diffForHumans()}}</p>
+                            <p class=""><a href="/posts/{{ $post->id }}" >{{ $post->title }}</a></p>
+                        </div>
+                    @endforeach
                 </div>
                 {{--关注模块--}}
                 <div class="tab-pane" id="tab_2">
-                    <div class="blog-post" style="margin-top: 30px">
-                        <p class="">Jadyn Medhurst Jr.</p>
-                        <p class="">关注：1 | 粉丝：1｜ 文章：0</p>
-                        <div>
-                            <button class="btn btn-default like-button" like-value="1" like-user="6" _token="MESUY3topeHgvFqsy9EcM916UWQq6khiGHM91wHy" type="button">取消关注</button>
+                    @foreach($susers as $suser)
+                        <div class="blog-post" style="margin-top: 30px">
+                            <p class="">{{ $suser->name }}</p>
+                            <p class="">关注：{{ $suser->stars_count }} | 粉丝：{{ $suser->fans_count }}｜ 文章：{{ $suser->posts_count }}</p>
+                            {{--将公共关注组件引入并传值 值是目标用户信息 用于传值的第二个参数是数组--}}
+                            @include('user.badges.like',['target_user'=>$suser])
                         </div>
-                    </div>
+                    @endforeach
                 </div>
                 {{--粉丝模块--}}
                 <div class="tab-pane" id="tab_3">
+                @foreach($fusers as $fuser)
                     <div class="blog-post" style="margin-top: 30px">
-                        <p class="">Jadyn Medhurst Jr.</p>
-                        <p class="">关注：1 | 粉丝：1｜ 文章：0</p>
+                        <p class="">{{ $fuser->name }}</p>
+                        <p class="">关注：{{ $fuser->stars_count }} | 粉丝：{{ $fuser->fans_count }}｜ 文章：{{ $fuser->posts_count }}</p>
+                        {{--将公共关注组件引入并传值 值是目标用户信息 用于传值的第二个参数是数组--}}
+                        @include('user.badges.like',['target_user'=>$fuser ])
                     </div>
+                @endforeach
                 </div>
             </div>
         </div>

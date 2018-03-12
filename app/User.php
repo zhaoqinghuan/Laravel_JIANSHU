@@ -8,17 +8,17 @@ class User extends Authenticatable{
     //  用户的文章列表
     public function posts(){
         //一个用户有多篇文章用hasMany 第一个参数关联对象的命名空间 第二个参数关联表的外键 第三个参数当前表的主键
-        return $this->hasMany(\App\Post::class,'user_id','id');
+        return $this->hasMany(\App\Post::class, 'user_id', 'id');
     }
     //  关注我的模型
-    public function fan(){
+    public function fans(){
         //一个用户有多个粉丝用hasMany 第一个参数关联对象的命名空间 第二个参数关联表的外键 第三个参数当前表的主键
-        return $this->hasMany(\App\Fan::class,'star_id','id');
+        return $this->hasMany(\App\Fan::class, 'star_id', 'id');
     }
     //  我关注的模型
-    public function star(){
+    public function stars(){
         //一个用户关注多个用户用hasMany 第一个参数关联对象的命名空间 第二个参数关联表的外键 第三个参数当前表的主键
-        return $this->hasMany(\App\Fan::class,'fan_id','id');
+        return $this->hasMany(\App\Fan::class, 'fan_id', 'id');
     }
     //  关注某人操作
     public function doFan($uid){
@@ -37,7 +37,7 @@ class User extends Authenticatable{
     //  当前用户是否被UID关注
     public function hasFan($uid){
         //在fans表里查询一条fan_id=$uid的数据
-        return $this->fan()->where('fan_id',$uid)->count();
+        return $this->fans()->where('fan_id', $uid)->count();
     }
     //  当前用户是否关注了UID
     public function hasStar($uid){

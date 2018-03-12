@@ -6,16 +6,44 @@ use App\User;
 class UserController extends Controller
 {
     //  个人中心页面
-    public function show(){
-        return view('user.show');
+    public function show(User $user){//模型绑定
+        //  传递个人信息      包含关注，粉丝，文章数
+        $user = User::withCount(['stars','fans','posts'])->find($user->id);
+            //使用User类的WithCount方法查询关注粉丝文章数的总数 查询id = $user->id这个用户的;
+        //  个人文章列表      按照创建时间取前十条。
+        $posts = $user->posts()->orderBy('created_at','desc')->take(10)->get();
+            //使用User类的自定义方法（posts）按照时间顺序查询倒序的前十条
+        //  个人关注列表      包括关注用户的关注，粉丝，文章数
+        $stars = $user->stars;//应用user类中的stars方法查询当前用户的所有关注
+        $susers = User::whereIn('id',$stars->pluck('star_id'))->withCount(['stars','fans','posts'])->get();
+            //使用User类的个人信息查询方法查询ID = 当前用户的关注ID的人的关注 粉丝 文章数 总数信息
+        //  个人粉丝列表      包括粉丝用户的关注，粉丝，文章数
+        $fans = $user->fans;//应用user类中的fans方法查询当前用户的所有粉丝
+        $fusers = User::whereIn('id',$fans->pluck('fan_id'))->withCount(['stars','fans','posts'])->get();
+            //使用User类的个人信息查询方法查询ID = 当前用户的粉丝ID的人的关注 粉丝 文章数 总数信息
+        return view('user.show',compact('user','posts','susers','fusers'));//输出信息
     }
     //添加关注
-    public function fan(){
-
+    public function fan(User $user){//模型绑定
+        //获取当前用户
+        $me = \Auth::user();
+        //当前用户调用添加关注模型方法 参数为目标用户ID
+        \App\Fan::firstOrCreate(['fan_id' => $me->id, 'star_id' => $user->id]);
+        return [
+            'error' => 0,
+            'msg' => ''
+        ];
     }
     //取消关注
-    public function unfan(){
-
+    public function unfan(User $user){//模型绑定
+        //获取当前用户
+        $me = \Auth::user();
+        //当前用户调用取消关注模型方法 参数为目标用户ID
+        \App\Fan::where('fan_id', $me->id)->where('star_id', $user->id)->delete();
+        return [
+            'error' => 0,
+            'msg' => ''
+        ];
     }
     //  个人设置行为
     public function settingStore(Request $request){

@@ -37,7 +37,7 @@
             <div class="blog-post">
                 <h2 class="blog-post-title"><a href="/posts/{{$post->id}}" >{{$post->title}}</a></h2>
                 <p class="blog-post-meta">{{$post->created_at->toFormattedDateString()}}
-                    by <a href="/user/5">{{ $post->user->name }}</a></p>
+                    by <a href="/user/{{$post->user->id}}">{{ $post->user->name }}</a></p>
                 {{-- 内容只显示100个字符长度多余的用...代替 {!! !!}方法的作用是过滤HTMl标签后进行展示 --}}
                 {!!str_limit($post->content,100,'...')!!}
                 <p class="blog-post-meta">赞 {{ $post->zans_count }}  | 评论 {{ $post->comments_count }}</p>
