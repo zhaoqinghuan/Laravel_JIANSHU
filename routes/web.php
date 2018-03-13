@@ -52,7 +52,11 @@ Route::group(['middleware' => 'auth:web'],function(){
     //  编辑器图片上传
         Route::post('/post/image/upload','\App\Http\Controllers\PostController@imageUpload');
 
-
+//  专题
+    //  专题详情页
+        Route::get('/topic/{topic}', '\App\Http\Controllers\TopicController@show');
+    //  专题投稿
+        Route::post('/topic/{topic}/submit', '\App\Http\Controllers\TopicController@submit');
 });
 
 //  用户模块
