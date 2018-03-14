@@ -9,8 +9,11 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 //使用中间件对路由进行控制
 Route::group(['middleware' => 'auth:web'],function(){
+
 //  个人中心模块
     //  添加关注
     Route::post('/user/{user}/fan','\App\Http\Controllers\UserController@fan');
@@ -71,3 +74,6 @@ Route::post('/login','\App\Http\Controllers\LoginController@login');
 
 //注册默认url
 Route::get('/',function(){return redirect('posts');});
+
+//引入后台路由文件
+include_once ('admin.php');
