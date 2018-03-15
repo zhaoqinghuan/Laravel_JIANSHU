@@ -14,5 +14,11 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('/logout','\App\Admin\Controllers\LoginController@logout');
         //  后台首页
         Route::get('/home','\App\Admin\Controllers\HomeController@index');
+        //  管理人员列表页
+        Route::get('/users','\App\Admin\Controllers\UserController@index');
+        //  管理人员添加静态页
+        Route::get('/users/create','\App\Admin\Controllers\UserController@create');
+        //  管理人员添加逻辑页
+        Route::post('/users/store','\App\Admin\Controllers\UserController@store');
     });
 });

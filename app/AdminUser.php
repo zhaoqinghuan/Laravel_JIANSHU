@@ -12,4 +12,7 @@ class AdminUser extends Authenticatable
     //  在模型文件中重写规则
     //  protected $rememberTokenName = 'remember_token';
     protected $rememberTokenName = '';
+
+    //  修改模型文件的注入字段限制
+    protected $guarded = [];
 }
