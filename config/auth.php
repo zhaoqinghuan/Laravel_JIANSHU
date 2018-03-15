@@ -40,6 +40,10 @@ return [
             'driver' => 'session',
             'provider' => 'users',
         ],
+        'admin' =>[
+            'driver' => 'session',//用户信息存储方式
+            'provider' => 'admins',//对应的模型文件
+        ],
 
         'api' => [
             'driver' => 'token',
@@ -68,6 +72,11 @@ return [
         'users' => [
             'driver' => 'eloquent',
             'model' => App\User::class,
+        ],
+        //创建后台管理员登录注册的配置项
+        'admins' =>[
+            'driver' => 'eloquent',
+            'model' => App\AdminUser::class,
         ],
 
         // 'users' => [
