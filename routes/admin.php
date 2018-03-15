@@ -20,5 +20,9 @@ Route::group(['prefix' => 'admin'],function(){
         Route::get('/users/create','\App\Admin\Controllers\UserController@create');
         //  管理人员添加逻辑页
         Route::post('/users/store','\App\Admin\Controllers\UserController@store');
+        //  文章审核静态页
+        Route::get('/posts','\App\Admin\Controllers\PostController@index');
+        //  文章审核逻辑页
+        Route::post('/posts/{post}/status', '\App\Admin\Controllers\PostController@status');
     });
 });

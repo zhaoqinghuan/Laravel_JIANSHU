@@ -75,5 +75,15 @@ class Post extends Model
         return $this->hasMany('App\Comment')->orderBy('created_at','desc');
     }
 
+    //  重写boot方法
+    protected static function boot()
+    {
+        parent::boot();
+        //  这个scope是默认的scope每次调用当前模型文件时都要先执行这个文件
+        static::addGlobalScope("avaiable",function(Builder $builder){
+            $builder->whereIn('status',[0,1]);
+            //  设置只有在当前模型对应的数据表的status字段等于0，1的时候该条数据才属于符合逻辑的
+        });
+    }
 
 }
