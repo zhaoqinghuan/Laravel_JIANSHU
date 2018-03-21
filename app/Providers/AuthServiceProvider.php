@@ -26,7 +26,35 @@ class AuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->registerPolicies();
-
-        //
+        //  注册Gate
+        $permissions = \App\AdminPermission::all();
+            //  先获取数据表中的所有的权限关联关系
+        foreach ($permissions as $permission){
+            Gate::define($permission->name,function($user) use($permission){
+                //  循环出每一个权限关联关系 注册Gate的时候使用权限关联关系的名称作为Gate的名称
+                //  匿名函数需要传入当前登录的用户信息 以及当前的权限关联关系
+                return $user->hasPermission($permission);
+                //  返回当前用户是否具有这个权限
+            });
+        }
     }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

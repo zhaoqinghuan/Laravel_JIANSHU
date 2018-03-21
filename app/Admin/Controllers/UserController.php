@@ -3,6 +3,40 @@ namespace App\Admin\Controllers;
 //  引入模型文件
 use App\AdminUser;
 class UserController extends Controller {
+    //  用户角色页面
+    public function role(\App\AdminUser $user){ //因为路由中有参数绑定所以这里进行路由绑定
+        //所有角色查询并展示
+        $roles = \App\AdminRole::all();
+        //我的角色查询并展示
+        $myRoles = $user->roles;
+        return view('admin.user.role',compact('roles','myRoles','user'));
+    }
+    //  用户角色储存
+    public function storeRole(\App\AdminUser $user){ //因为路由中有参数绑定所以这里进行路由绑定
+        //  验证
+        $this->validate(request(),[
+            'roles'=>'required|array'
+        ]);
+        //  处理
+        //      获取当前用户传递上来的角色
+        $roles = \App\AdminRole::findMany(request('roles'));
+        //      当前用户的角色
+        $myRoles = $user->roles;
+        //      要增加的角色
+        $addRoles = $roles->diff($myRoles);//使用diff方法取在roles中却不在myRoles中的值
+        foreach ($addRoles as $role){
+            $user->assignRole($role);
+            //执行存储
+        }
+        //      要删除的角色
+        $delRoles = $myRoles->diff($roles);//使用diff方法取在myRoles中却不在roles中的值
+        foreach ($delRoles as $role){
+            $user->deleteRole($role);
+            //执行删除
+        }
+        //  渲染
+        return back();
+    }
     //  管理员列表
     public function index(){
         //  应用模型文件中的方法获取出管理员列表 每页展示10条
