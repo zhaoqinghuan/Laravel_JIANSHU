@@ -29,6 +29,10 @@ Route::group(['middleware' => 'auth:web'],function(){
     //  登出行为
     Route::get('/logout','\App\Http\Controllers\LoginController@logout');
 
+    //  通知
+    Route::get('/notices','\App\Http\Controllers\NoticeController@index');
+
+
 //  文章模块
     //  文章搜索
     Route::get('/posts/search', '\App\Http\Controllers\PostController@search');

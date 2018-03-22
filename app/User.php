@@ -5,6 +5,20 @@ class User extends Authenticatable{
     protected $fillable =[
         'name','email','password'
     ];
+    //  用户收到的通知
+    public function notices(){
+        //  因为一个用户收到多个通知 一个通知同时对应多个用户 所以是多对多的关系
+        // belongsToMany 第一个参数是关联模型的模型文件 第二个参数是关联关系对应的数据表
+        // 第三个参数是当前模型主键在关联表中的外键 第四个参数是关联模型文件对应表在关联关系表中的主键
+        return $this->belongsToMany(\App\Notice::class,'user_notice',
+            'user_id','notice_id')->withPivot(['user_id','notice_id']);
+    }
+    //  用户增加通知
+    public function addNotices($notices){// 传进来一个notices对象
+        //  直接调用对象notices对象执行一个通知添加的方法
+        return $this->notices()->save($notices);
+    }
+
     //  用户的文章列表
     public function posts(){
         //一个用户有多篇文章用hasMany 第一个参数关联对象的命名空间 第二个参数关联表的外键 第三个参数当前表的主键

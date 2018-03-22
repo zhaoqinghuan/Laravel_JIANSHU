@@ -15,7 +15,7 @@ return [
     |
     */
 
-    'default' => env('QUEUE_DRIVER', 'sync'),
+    'default' => env('QUEUE_DRIVER', 'sync'),//修改这个配置为database 直接在.env文件中配置
 
     /*
     |--------------------------------------------------------------------------

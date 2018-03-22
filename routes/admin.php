@@ -14,6 +14,17 @@ Route::group(['prefix' => 'admin'],function(){
         //  后台首页
         Route::get('/home','\App\Admin\Controllers\HomeController@index');
 
+//使用Gate进行系统通知权限管理
+        Route::group(['middleware'=>'can:notice'],function() {
+            //专题模块路由使用resource
+            Route::resource('notices','\App\Admin\Controllers\NoticeController',['only'=>[
+                'index','create','store']]);
+            /*因为这里使用了resource的路由定义方法 所以系统默认帮我们开启了所有方法 在不需要某些方法的情况下
+            我们使用resource的第三个参数来限制只使用哪些操作
+            */
+        });
+
+
 //使用Gate进行专题权限管理
         Route::group(['middleware'=>'can:topic'],function(){
         //专题模块路由使用resource
