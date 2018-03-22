@@ -27,8 +27,20 @@ class PostController extends Controller
         //按照时间顺序将所有的文章查询出来
         //$posts = Post::orderby('created_at','desc')->get();
         //按照时间顺序将所有的文章查询出来并进行分页
-        $posts = Post::orderby('created_at','desc')
-            ->withCount(['comments','zans'])->paginate(10);
+
+            //  最初的方式
+                //$posts = Post::orderby('created_at','desc')
+                //  ->withCount(['comments','zans'])->paginate(10);
+
+            //  使用with
+                //$posts = Post::orderby('created_at','desc')
+                //  ->withCount(['comments','zans'])->with('user')->paginate(10);
+
+            //  使用load
+                $posts = Post::orderby('created_at','desc')
+                   ->withCount(['comments','zans'])->paginate(10);
+                $posts->load('user');//指明关联关系
+
         return view("post/index",compact('posts'));
     }
 

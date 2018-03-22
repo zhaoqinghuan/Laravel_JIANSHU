@@ -154,6 +154,9 @@ return [
         //Scout插件注册以及Elasticsearch插件注册
         Laravel\Scout\ScoutServiceProvider::class,
         ScoutEngines\Elasticsearch\ElasticsearchProvider::class,
+
+        //  Debugbar 插件注册
+        Barryvdh\Debugbar\ServiceProvider::class,
     ],
     /*
     |--------------------------------------------------------------------------

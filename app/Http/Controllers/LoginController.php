@@ -6,6 +6,11 @@ use Illuminate\Http\Request;
 
 class LoginController extends Controller
 {
+    //  WelCome
+    public function welcome(){
+        return redirect('/login');
+    }
+
     //  登录页面
     public function index(){
         //判断当前是否登录 如果已经登录跳转到文章列表页
