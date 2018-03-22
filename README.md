@@ -1,7 +1,4 @@
 
-
-## Laravel JianShu.
-
-## Created Team
-
+## Laravel 
 - ZHAOQINGHUAN ([GitHub](http://github.com/zhaoqinghuan))
+
