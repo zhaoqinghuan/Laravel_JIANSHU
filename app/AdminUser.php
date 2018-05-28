@@ -27,7 +27,7 @@ class AdminUser extends Authenticatable
 
     //  判断用户是否具有某个角色
     public function isInRoles($roles){
-        //  查询当前用户的某一橘色在角色表中的角色是否存在使用count查询
+        //  查询当前用户的某一角色在角色表中的角色是否存在使用count查询
         //  使用!!在count查询后返回布尔值
         return !! $roles->intersect($this->roles)->count();
     }

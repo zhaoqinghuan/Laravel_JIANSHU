@@ -7,7 +7,8 @@ class AdminRole extends Model
 {
     //  指定模型文件对应的数据表
     protected $table = "admin_roles";
-
+    
+    
     //  获取当前角色的所有权限
     public function permissions(){
         return $this->belongsToMany(\App\AdminPermission::class,
